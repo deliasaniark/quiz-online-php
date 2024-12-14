@@ -1,0 +1,65 @@
+Fitur:
+1. Autentikasi
+- Login
+- Register
+- Logout
+
+2. Dashboard
+- Daftar kuis tersedia
+- Total skor pengguna
+- Riwayat kuis yang sudah dikerjakan
+- Ranking peserta berdasarkan total_score
+
+3. Manajemen Kuis (Admin)
+- Buat kuis baru (title, description, is_active)
+- Edit kuis
+- Tambah soal (question, option_a/b/c/d, answer, explanation)
+- Hapus kuis (soft delete dengan deleted_at)
+- Aktivasi/Deaktivasi kuis
+
+4. Pengerjaan Kuis (User)
+- Mulai kuis
+- Submit jawaban (disimpan di user_answers)
+- Lihat hasil/nilai (quiz_results)
+- Lewati soal untuk dijawab nanti
+
+5. Riwayat & Nilai
+- Riwayat kuis (quiz_results)
+- Detail jawaban (user_answers)
+- Nilai per kuis
+- Penjelasan jawaban benar
+- Kembali ke soal yang dilewati
+- Review jawaban sebelum submit final
+
+Database (sesuai database.sql):
+- users (id, username, password, full_name, profile_photo, bio, gender, birth_date, phone, total_score, role)
+- quiz (id, title, description, is_active)
+- questions (id, quiz_id, question, option_a/b/c/d, answer, explanation)
+- quiz_results (id, user_id, quiz_id, score, is_completed)
+- user_answers (id, quiz_result_id, question_id, user_answer, is_correct)
+
+Role:
+1. Admin:
+- Kelola semua kuis (CRUD quiz)
+- Kelola soal (CRUD questions)
+- Lihat hasil semua user (quiz_results & user_answers)
+- Monitoring progress pengerjaan user
+
+2. User:
+- Mengerjakan kuis yang aktif (is_active = true)
+- Lihat nilai sendiri (quiz_results)
+- Lihat ranking berdasarkan total_score
+- Navigasi antar soal yang belum dijawab
+
+Teknologi:
+- PHP Native
+- MySQL
+- Bootstrap 5
+- JavaScript (untuk validasi form, navigasi soal, dan interaksi UI)
+
+Fitur Tambahan yang bisa dikembangkan:
+- Timer pengerjaan kuis
+- Shuffle urutan soal
+- Upload gambar profil
+- Export hasil kuis ke PDF
+- Bookmark soal sulit
