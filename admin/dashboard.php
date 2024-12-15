@@ -24,6 +24,7 @@ $total_quiz = mysqli_fetch_assoc($result_quiz)['total_quiz'];
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Dashboard Admin - Quiz Online</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -32,6 +33,7 @@ $total_quiz = mysqli_fetch_assoc($result_quiz)['total_quiz'];
     <link href="/assets/css/style.css" rel="stylesheet">
     <link href="/assets/css/sidebar.css" rel="stylesheet">
 </head>
+
 <body class="bg-light">
     <?php include 'components/sidebar.php'; ?>
 
@@ -47,7 +49,6 @@ $total_quiz = mysqli_fetch_assoc($result_quiz)['total_quiz'];
             <div class="card welcome-card mb-4">
                 <div class="card-body">
                     <h4>Selamat Datang, <?php echo $user['full_name'] ?? $user['username']; ?>!</h4>
-                    <p class="mb-0">Kelola quiz online dengan mudah melalui dashboard admin.</p>
                 </div>
             </div>
 
@@ -79,6 +80,69 @@ $total_quiz = mysqli_fetch_assoc($result_quiz)['total_quiz'];
                     </div>
                 </div>
             </div>
+
+            <!-- Leaderboard Section -->
+            <div class="row">
+                <div class="col-md-12 mb-4">
+                    <div class="card shadow-sm">
+                        <h6 class="mb-0 mt-3">Top 5 Peserta Quiz</h6>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="bg-light">
+                                        <tr>
+                                            <th>Peringkat</th>
+                                            <th>Nama</th>
+                                            <th>Quiz Selesai</th>
+                                            <th>Total Skor</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $query = "SELECT u.username, u.full_name,
+                                                 COUNT(DISTINCT qr.quiz_id) as completed_quiz,
+                                                 u.total_score
+                                                 FROM users u
+                                                 JOIN quiz_results qr ON u.id = qr.user_id
+                                                 WHERE u.role != 'admin' AND qr.is_completed = 1
+                                                 GROUP BY u.id
+                                                 ORDER BY u.total_score DESC, completed_quiz DESC
+                                                 LIMIT 5";
+                                        $top_users = mysqli_query($conn, $query);
+                                        $rank = 1;
+                                        while ($row = mysqli_fetch_assoc($top_users)) {
+                                            echo "<tr>";
+                                            // Badge untuk 3 peringkat teratas
+                                            echo "<td>";
+                                            switch ($rank) {
+                                                case 1:
+                                                    echo "<span class='badge' style='font-size: 1.2em; background-color: var(--gold);' title='Juara 1'><i class='bi bi-trophy-fill'></i></span>";
+                                                    break;
+                                                case 2:
+                                                    echo "<span class='badge' style='font-size: 1.2em; background-color: var(--silver);' title='Juara 2'><i class='bi bi-award'></i></span>";
+                                                    break;
+                                                case 3:
+                                                    echo "<span class='badge' style='font-size: 1.2em; background-color: var(--bronze);' title='Juara 3'><i class='bi bi-award'></i></span>";
+                                                    break;
+                                                default:
+                                                    echo "<span class='badge bg-light text-dark'>" . $rank . "</span>";
+                                            }
+                                            echo "</td>";
+                                            echo "<td>" . htmlspecialchars($row['full_name'] ?? $row['username']) . "</td>";
+                                            echo "<td>" . $row['completed_quiz'] . " Quiz</td>";
+                                            echo "<td><span class='fw-bold text-primary-dark'>" .
+                                                number_format($row['total_score']) . "</span></td>";
+                                            $rank++;
+                                            echo "</tr>";
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -90,7 +154,8 @@ $total_quiz = mysqli_fetch_assoc($result_quiz)['total_quiz'];
     </script>
 
     <?php
-    function getProfilePhotoUrl($user) {
+    function getProfilePhotoUrl($user)
+    {
         if ($user['profile_photo'] && file_exists('../assets/img/profile/' . $user['profile_photo'])) {
             return '/assets/img/profile/' . $user['profile_photo'];
         }
@@ -98,4 +163,5 @@ $total_quiz = mysqli_fetch_assoc($result_quiz)['total_quiz'];
     }
     ?>
 </body>
-</html> 
+
+</html>
