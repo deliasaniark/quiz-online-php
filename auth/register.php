@@ -16,8 +16,11 @@ if (isset($_POST['register'])) {
         if (mysqli_num_rows($check) > 0) {
             $error = "Username sudah digunakan!";
         } else {
-            // Simpan user baru (hanya username, password, dan role)
-            $query = "INSERT INTO users (username, password, role) VALUES ('$username', '$password', 'user')";
+            // Hash password sebelum disimpan
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            
+            // Simpan user baru dengan password yang sudah di-hash
+            $query = "INSERT INTO users (username, password, role) VALUES ('$username', '$hashed_password', 'user')";
             if (mysqli_query($conn, $query)) {
                 // Redirect ke login
                 redirect('/auth/login.php');
