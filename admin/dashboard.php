@@ -17,7 +17,7 @@ $query_users = "SELECT COUNT(*) as total_users FROM users WHERE role != 'admin'"
 $result_users = mysqli_query($conn, $query_users);
 $total_users = mysqli_fetch_assoc($result_users)['total_users'];
 
-$query_quiz = "SELECT COUNT(*) as total_quiz FROM questions";
+$query_quiz = "SELECT COUNT(*) as total_quiz FROM quiz WHERE deleted_at IS NULL";
 $result_quiz = mysqli_query($conn, $query_quiz);
 $total_quiz = mysqli_fetch_assoc($result_quiz)['total_quiz'];
 ?>
@@ -72,7 +72,7 @@ $total_quiz = mysqli_fetch_assoc($result_quiz)['total_quiz'];
                             </div>
                             <div>
                                 <h4 class="fw-bold mb-0"><?php echo $total_quiz; ?></h4>
-                                <small class="text-secondary">Total Soal Quiz</small>
+                                <small class="text-secondary">Total Quiz</small>
                             </div>
                         </div>
                     </div>
