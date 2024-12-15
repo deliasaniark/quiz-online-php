@@ -3,18 +3,16 @@ CREATE DATABASE IF NOT EXISTS db_quiz_online;
 USE db_quiz_online;
 
 -- Users table with additional profile columns
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE users (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(50) UNIQUE NOT NULL,
+    username VARCHAR(50) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    full_name VARCHAR(100) NOT NULL,
-    profile_photo VARCHAR(255) DEFAULT 'img/default.jpg',
-    bio TEXT,
-    gender ENUM('M','F'),
-    birth_date DATE,
-    phone VARCHAR(15),
-    total_score INT DEFAULT 0,
-    role ENUM('admin', 'user') DEFAULT 'user',
+    full_name VARCHAR(100) DEFAULT NULL,
+    gender CHAR(1) DEFAULT NULL,
+    birth_date DATE DEFAULT NULL,
+    phone VARCHAR(20) DEFAULT NULL,
+    profile_photo VARCHAR(255) DEFAULT NULL,
+    role VARCHAR(20) NOT NULL DEFAULT 'user',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     deleted_at TIMESTAMP NULL DEFAULT NULL
@@ -73,3 +71,5 @@ CREATE TABLE IF NOT EXISTS user_answers (
     FOREIGN KEY (quiz_result_id) REFERENCES quiz_results(id),
     FOREIGN KEY (question_id) REFERENCES questions(id)
 );
+
+INSERT INTO users (username, password, role) VALUES ('admin', 'admin123', 'admin');
