@@ -10,6 +10,11 @@
     --gray: #6c757d;
     --success: #28a745;
     --danger: #dc3545;
+
+    /* badge */
+    --bronze: #CD853F;
+    --silver: #C0C0C0;
+    --gold: #FFD700;
     
     /* Font family */
     --font-family: 'Poppins', sans-serif;
