@@ -1,0 +1,3 @@
+# Mengabaikan folder foto profil pengguna
+assets/img/profile/*
+!assets/img/profile/.gitkeep
