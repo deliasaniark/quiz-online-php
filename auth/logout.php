@@ -5,4 +5,4 @@ require_once '../config/config.php';
 session_destroy();
 
 // Redirect ke halaman login
-redirect('auth/login.php');
+redirect('/auth/login.php');
