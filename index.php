@@ -1,4 +1,4 @@
-    <?php
+<?php
 // Hubungkan ke config.php
 require_once 'config/config.php';
 
@@ -7,11 +7,10 @@ if (isset($_SESSION['user_id'])) {
     // Jika sudah login, arahkan sesuai role
     if ($_SESSION['role'] == 'admin') {
         redirect('/admin/dashboard.php');
-                } else {
+    } else {
         redirect('/user/dashboard.php');
-                }
-            } else {
+    }
+} else {
     // Jika belum login, arahkan ke halaman login
     redirect('/auth/login.php');
 }
-?> 
