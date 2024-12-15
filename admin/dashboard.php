@@ -101,12 +101,12 @@ $total_quiz = mysqli_fetch_assoc($result_quiz)['total_quiz'];
                                         <?php
                                         $query = "SELECT u.username, u.full_name,
                                                  COUNT(DISTINCT qr.quiz_id) as completed_quiz,
-                                                 u.total_score
+                                                 SUM(qr.score) as total_score
                                                  FROM users u
                                                  JOIN quiz_results qr ON u.id = qr.user_id
                                                  WHERE u.role != 'admin' AND qr.is_completed = 1
                                                  GROUP BY u.id
-                                                 ORDER BY u.total_score DESC, completed_quiz DESC
+                                                 ORDER BY total_score DESC, completed_quiz DESC
                                                  LIMIT 5";
                                         $top_users = mysqli_query($conn, $query);
                                         $rank = 1;

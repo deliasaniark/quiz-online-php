@@ -15,9 +15,10 @@ $user = mysqli_fetch_assoc($result);
 // Proses hapus quiz
 if (isset($_GET['delete'])) {
     $quiz_id = $_GET['delete'];
-    $query = "DELETE FROM quiz WHERE id = ?";
+    $now = date('Y-m-d H:i:s');
+    $query = "UPDATE quiz SET deleted_at = ? WHERE id = ?";
     $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "i", $quiz_id);
+    mysqli_stmt_bind_param($stmt, "si", $now, $quiz_id);
 
     if(mysqli_stmt_execute($stmt)) {
         $_SESSION['notification'] = [

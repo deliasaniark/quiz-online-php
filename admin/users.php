@@ -15,7 +15,8 @@ $user = mysqli_fetch_assoc($result);
 // Proses hapus user
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
-    $query = "DELETE FROM users WHERE id = '$id' AND role != 'admin'";
+    $now = date('Y-m-d H:i:s');
+    $query = "UPDATE users SET deleted_at = '$now' WHERE id = '$id' AND role != 'admin'";
     if(mysqli_query($conn, $query)) {
         header('Location: users.php');
         exit;
@@ -23,7 +24,7 @@ if (isset($_GET['delete'])) {
 }
 
 // Ambil semua data users kecuali admin
-$query = "SELECT * FROM users WHERE role != 'admin' ORDER BY created_at DESC";
+$query = "SELECT * FROM users WHERE role != 'admin' AND deleted_at IS NULL ORDER BY created_at DESC";
 $result = mysqli_query($conn, $query);
 
 // Debug

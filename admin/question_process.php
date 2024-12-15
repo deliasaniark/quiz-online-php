@@ -81,9 +81,10 @@ if (isset($_GET['delete']) && isset($_GET['quiz_id'])) {
     $question_id = $_GET['delete'];
     $quiz_id = $_GET['quiz_id'];
 
-    $query = "DELETE FROM questions WHERE id = ? AND quiz_id = ?";
+    $now = date('Y-m-d H:i:s');
+    $query = "UPDATE questions SET deleted_at = ? WHERE id = ? AND quiz_id = ?";
     $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "ii", $question_id, $quiz_id);
+    mysqli_stmt_bind_param($stmt, "sii", $now, $question_id, $quiz_id);
 
     if (mysqli_stmt_execute($stmt)) {
         $_SESSION['notification'] = [

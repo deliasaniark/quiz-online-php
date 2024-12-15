@@ -64,16 +64,17 @@ if (isset($_POST['edit_quiz'])) {
 if (isset($_GET['delete'])) {
     $quiz_id = $_GET['delete'];
     
-    // Hapus soal terkait terlebih dahulu
-    $query = "DELETE FROM questions WHERE quiz_id = ?";
+    // Soft delete soal terkait terlebih dahulu
+    $now = date('Y-m-d H:i:s');
+    $query = "UPDATE questions SET deleted_at = ? WHERE quiz_id = ?";
     $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "i", $quiz_id);
+    mysqli_stmt_bind_param($stmt, "si", $now, $quiz_id);
     mysqli_stmt_execute($stmt);
     
-    // Kemudian hapus quiz
-    $query = "DELETE FROM quiz WHERE id = ?";
+    // Kemudian soft delete quiz
+    $query = "UPDATE quiz SET deleted_at = ? WHERE id = ?";
     $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "i", $quiz_id);
+    mysqli_stmt_bind_param($stmt, "si", $now, $quiz_id);
     
     if (mysqli_stmt_execute($stmt)) {
         $_SESSION['notification'] = [
