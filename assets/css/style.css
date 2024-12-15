@@ -10,6 +10,9 @@
     --gray: #6c757d;
     --success: #28a745;
     --danger: #dc3545;
+    
+    /* Font family */
+    --font-family: 'Poppins', sans-serif;
 }
 
 /* Navbar */
@@ -198,4 +201,13 @@
 .modal-footer {
     background-color: #f8f9fa;
     border-top: 1px solid #dee2e6;
+}
+
+body {
+    font-family: var(--font-family);
+}
+
+h1, h2, h3, h4, h5, h6,
+.form-label {
+    font-family: var(--font-family);
 }
