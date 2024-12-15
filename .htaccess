@@ -1,0 +1,14 @@
+RewriteEngine On
+RewriteBase /
+
+# Jika file/direktori ada, gunakan itu
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Jika tidak ada, redirect ke index.php
+RewriteRule ^(.*)$ index.php/$1 [L]
+
+# Allow access to assets folder
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+</IfModule> 
