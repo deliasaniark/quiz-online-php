@@ -278,16 +278,9 @@ if ($rank_result && $row = mysqli_fetch_assoc($rank_result)) {
     </main>
 
     <?php include 'components/footer.php'; ?>
-    <script>
-    // Tambahkan class scrolled saat scroll
-    window.addEventListener('scroll', function() {
-        const navbar = document.querySelector('.navbar-custom');
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
-    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/script.js"></script>
 </body>
 </html> 

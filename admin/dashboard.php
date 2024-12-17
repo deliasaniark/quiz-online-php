@@ -152,16 +152,6 @@ $total_quiz = mysqli_fetch_assoc($result_quiz)['total_quiz'];
             document.querySelector('.sidebar').classList.toggle('active');
         });
     </script>
-
-    <?php
-    function getProfilePhotoUrl($user)
-    {
-        if ($user['profile_photo'] && file_exists('../assets/img/profile/' . $user['profile_photo'])) {
-            return '/assets/img/profile/' . $user['profile_photo'];
-        }
-        return 'https://ui-avatars.com/api/?name=' . urlencode($user['full_name'] ?? $user['username']) . '&background=random';
-    }
-    ?>
 </body>
 
 </html>

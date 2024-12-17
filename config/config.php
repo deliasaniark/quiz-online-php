@@ -34,7 +34,10 @@ function is_admin() {
 
 // Tambahkan fungsi ini
 function getProfilePhotoUrl($user) {
-    if ($user['profile_photo'] && file_exists('../assets/img/profile/' . $user['profile_photo'])) {
+    // Gunakan ROOT_PATH untuk mendapatkan path absolut
+    $photo_path = __DIR__ . '/../assets/img/profile/' . $user['profile_photo'];
+    
+    if ($user['profile_photo'] && file_exists($photo_path)) {
         return '/assets/img/profile/' . $user['profile_photo'];
     }
     return 'https://ui-avatars.com/api/?name=' . urlencode($user['full_name'] ?? $user['username']) . '&background=random';

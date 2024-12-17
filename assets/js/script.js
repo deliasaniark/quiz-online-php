@@ -21,4 +21,14 @@ function showNotification(message, type = 'success') {
             notification.remove();
         }, 500);
     }, 3000);
-} 
+}
+
+// Navbar scroll effect
+window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar-custom');
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+}); 

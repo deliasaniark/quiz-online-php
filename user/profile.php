@@ -101,26 +101,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <main class="content mt-5">
         <div class="container-fluid px-4 mt-4">
-            <?php if (isset($_SESSION['success'])): ?>
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <?php 
-                    echo $_SESSION['success'];
-                    unset($_SESSION['success']);
-                    ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-            <?php endif; ?>
-
-            <?php if (isset($_SESSION['error'])): ?>
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <?php 
-                    echo $_SESSION['error'];
-                    unset($_SESSION['error']);
-                    ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-            <?php endif; ?>
-
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card">
@@ -244,7 +224,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/script.js"></script>
     <script>
+    // Tampilkan notifikasi jika ada
+    <?php if (isset($_SESSION['success'])): ?>
+        showNotification("<?php echo $_SESSION['success']; ?>", "success");
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['error'])): ?>
+        showNotification("<?php echo $_SESSION['error']; ?>", "error");
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+
     // Preview foto profil sebelum upload
     document.getElementById('profile_photo').addEventListener('change', function(e) {
         if (e.target.files && e.target.files[0]) {
@@ -285,16 +277,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 alert('Password baru minimal 6 karakter!');
                 return;
             }
-        }
-    });
-
-    // Navbar scroll effect
-    window.addEventListener('scroll', function() {
-        const navbar = document.querySelector('.navbar-custom');
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
         }
     });
     </script>

@@ -52,15 +52,6 @@ while ($row = mysqli_fetch_assoc($results)) {
     $grouped_results[$quiz_id]['results'][] = $row;
     $grouped_results[$quiz_id]['completed_users'][] = $row['user_id'];
 }
-
-// Fungsi untuk mendapatkan URL foto profil (diperlukan untuk sidebar)
-function getProfilePhotoUrl($user)
-{
-    if ($user['profile_photo'] && file_exists('../assets/img/profile/' . $user['profile_photo'])) {
-        return '/assets/img/profile/' . $user['profile_photo'];
-    }
-    return 'https://ui-avatars.com/api/?name=' . urlencode($user['full_name'] ?? $user['username']) . '&background=random';
-}
 ?>
 
 <!DOCTYPE html>

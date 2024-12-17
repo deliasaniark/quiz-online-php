@@ -37,13 +37,6 @@ mysqli_stmt_bind_param($stmt, "i", $quiz_id);
 mysqli_stmt_execute($stmt);
 $questions = mysqli_stmt_get_result($stmt);
 
-// Fungsi untuk mendapatkan URL foto profil
-function getProfilePhotoUrl($user) {
-    if ($user['profile_photo'] && file_exists('../assets/img/profile/' . $user['profile_photo'])) {
-        return '/assets/img/profile/' . $user['profile_photo'];
-    }
-    return 'https://ui-avatars.com/api/?name=' . urlencode($user['full_name'] ?? $user['username']) . '&background=random';
-}
 ?>
 
 <!DOCTYPE html>
