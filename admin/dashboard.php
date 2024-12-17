@@ -125,7 +125,7 @@ $total_quiz = mysqli_fetch_assoc($result_quiz)['total_quiz'];
                                                     echo "<span class='badge' style='font-size: 1.2em; background-color: var(--bronze);' title='Juara 3'><i class='bi bi-award'></i></span>";
                                                     break;
                                                 default:
-                                                    echo "<span class='badge bg-light text-dark'>" . $rank . "</span>";
+                                                    echo "<span class='badge bg-light text-dark'>#" . $rank . "</span>";
                                             }
                                             echo "</td>";
                                             echo "<td>" . htmlspecialchars($row['full_name'] ?? $row['username']) . "</td>";
