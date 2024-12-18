@@ -37,14 +37,15 @@ foreach ($answers as $answer) {
     mysqli_stmt_bind_param($stmt, "i", $question_id);
     mysqli_stmt_execute($stmt);
     $correct_answer = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt))['answer'];
-    $is_correct = $user_answer === $correct_answer;
-
+    $is_correct = ($user_answer === $correct_answer);
+    $is_correct_int = (int)$is_correct;
+    
     // Simpan jawaban
     $query = "INSERT INTO user_answers (quiz_result_id, question_id, user_answer, is_correct) 
               VALUES (?, ?, ?, ?)
               ON DUPLICATE KEY UPDATE user_answer = ?, is_correct = ?";
     $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "iissss", $quiz_result_id, $question_id, $user_answer, $is_correct, $user_answer, $is_correct);
+    mysqli_stmt_bind_param($stmt, "iisisi", $quiz_result_id, $question_id, $user_answer, $is_correct_int, $user_answer, $is_correct_int);
     
     if (!mysqli_stmt_execute($stmt)) {
         $success = false;
