@@ -114,7 +114,7 @@ if ($rank_result && $row = mysqli_fetch_assoc($rank_result)) {
                     </div>
                     <h3 class="mb-1"><?php 
                         echo $completed_quiz > 0 ? 
-                            number_format(($user['total_score'] / $completed_quiz), 1) : 0; 
+                            number_format(($user['total_score'] / $completed_quiz), 1) : 0;
                     ?></h3>
                     <p class="text-muted mb-0">Rata-rata Skor</p>
                 </div>
