@@ -136,16 +136,16 @@ $progress = ($answered_count / $total_questions) * 100;
                                     
                                     foreach ($options as $key => $value):
                                         $is_selected = isset($answered_questions[$question_id]) && 
-                                                     $answered_questions[$question_id] === $key;
+                                                    $answered_questions[$question_id] === $key;
                                     ?>
-                                    <label class="quiz-option <?php echo $is_selected ? 'selected' : ''; ?>">
+                                    <label class="quiz-option <?php echo $is_selected ? 'selected' : ''; ?>" style="display: block;">
                                         <div class="d-flex align-items-center">
                                             <div class="option-circle"><?php echo $key; ?></div>
                                             <input type="radio" 
-                                                   name="question_<?php echo $question_id; ?>" 
-                                                   value="<?php echo $key; ?>"
-                                                   class="d-none"
-                                                   <?php echo $is_selected ? 'checked' : ''; ?>>
+                                                name="question_<?php echo $question_id; ?>" 
+                                                value="<?php echo $key; ?>"
+                                                class="d-none"
+                                                <?php echo $is_selected ? 'checked' : ''; ?>>
                                             <div class="option-text"><?php echo htmlspecialchars($value); ?></div>
                                         </div>
                                     </label>
