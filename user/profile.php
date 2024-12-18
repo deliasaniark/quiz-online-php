@@ -145,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <label class="form-label">Username</label>
                                         <input type="text" 
                                                class="form-control" 
-                                               value="<?php echo htmlspecialchars($user['username']); ?>" 
+                                               value="<?php echo htmlspecialchars($user['username'] ?? ''); ?>" 
                                                disabled>
                                     </div>
                                     <div class="col-md-6">
@@ -153,12 +153,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <input type="text" 
                                                name="full_name" 
                                                class="form-control" 
-                                               value="<?php echo htmlspecialchars($user['full_name']); ?>" 
-                                               required>
+                                               value="<?php echo htmlspecialchars($user['full_name'] ?? ''); ?>" 
+                                        >
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Jenis Kelamin</label>
-                                        <select name="gender" class="form-select" required>
+                                        <select name="gender" class="form-select">
                                             <option value="">Pilih Jenis Kelamin</option>
                                             <option value="L" <?php echo $user['gender'] === 'L' ? 'selected' : ''; ?>>Laki-laki</option>
                                             <option value="P" <?php echo $user['gender'] === 'P' ? 'selected' : ''; ?>>Perempuan</option>
@@ -169,16 +169,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <input type="date" 
                                                name="birth_date" 
                                                class="form-control" 
-                                               value="<?php echo $user['birth_date']; ?>" 
-                                               required>
+                                               value="<?php echo $user['birth_date'] ?? ''; ?>" 
+                                        >
                                     </div>
                                     <div class="col-md-12">
                                         <label class="form-label">Nomor Telepon</label>
                                         <input type="tel" 
                                                name="phone" 
                                                class="form-control" 
-                                               value="<?php echo htmlspecialchars($user['phone']); ?>" 
-                                               required>
+                                               value="<?php echo htmlspecialchars($user['phone'] ?? ''); ?>" 
+                                        >
                                     </div>
                                 </div>
 
